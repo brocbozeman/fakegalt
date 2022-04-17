@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using api.Models;
+using api.DataAccess;
+using api.Interfaces;
 
 namespace classproject.Controllers
 {
@@ -13,9 +16,12 @@ namespace classproject.Controllers
     {
         // GET: api/Stores
         [HttpGet]
-        public List<string> Get()
+        public List<Store> Get()
         {
-            return new List<string> {"value1, value2"};
+            List<Store> myStores = new List<Store>();
+            IStoreDataHandler dataHandler = new StoreDataHandlerTest();
+            myStores = dataHandler.GetAllStores();
+            return myStores;
         }
 
         // GET: api/Stores/5
